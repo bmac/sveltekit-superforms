@@ -212,7 +212,7 @@ test('Optional values', async () => {
 
   const output = await superValidate({ other: 'Test' }, schema);
   expect(output.valid).equals(true);
-  expect(output.message).equals(null);
+  expect(output.message).toBeUndefined();
   expect(output.data.name).toBeUndefined();
   expect(output.data.other).equals('Test');
   expect(output.errors).toStrictEqual({});
@@ -342,7 +342,7 @@ test('More default values', async () => {
   expect(form.valid).toEqual(false);
   expect(form.errors).toEqual({});
   expect(form.empty).toEqual(true);
-  expect(form.message).toEqual(null);
+  expect(form.message).toBeUndefined();
 
   expect(form.constraints).toStrictEqual({
     agree: { required: true },
@@ -392,7 +392,6 @@ test('Zod enums and native enums', async () => {
       gender: null
     },
     empty: true,
-    message: null,
     constraints: {
       color: { required: true },
       fruit: { required: true },
@@ -431,7 +430,6 @@ test('Posting Zod enums and native enums', async () => {
       fruitsstring: [FruitsString.Apple, FruitsString.Banana],
       gender: null
     },
-    message: null,
     constraints: {
       color: { required: true },
       fruit: { required: true },
@@ -455,7 +453,6 @@ test('Agressive type coercion to avoid schema duplication', async () => {
     errors: {},
     data: { agree: false, fruit: undefined, number: NaN },
     empty: true,
-    message: null,
     constraints: {
       agree: { required: true },
       fruit: { required: true },
